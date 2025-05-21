@@ -17,6 +17,7 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    console.log("MESSAGE RECEIVED:", message);
     const completion = await openai.createChatCompletion({
       model: 'gpt-4o-mini',
       messages: [
@@ -36,6 +37,7 @@ If the message isn't understandable, return: {
         { role: 'user', content: message },
       ],
     });
+    console.log("OPENAI RESPONSE:", completion.data);
 
     const aiResponse = completion.data.choices[0].message.content;
     return res.status(200).json({ result: aiResponse });
