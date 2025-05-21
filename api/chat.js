@@ -51,8 +51,13 @@ Be concise, capitalize items, and do not explain or add commentary.`
     });
     console.log("OPENAI RESPONSE:", completion);
 
-    const aiResponse = completion.choices[0].message.content;
-    return res.status(200).json({ result: aiResponse });
+    const content = completion.choices[0].message.content;
+    try {
+      const parsed = JSON.parse(content);
+      return res.status(200).json(parsed);
+    } catch (err) {
+      return res.status(200).json({ error: "Could not parse AI response", raw: content });
+    }
   } catch (error) {
     console.error('OpenAI error:', error.response?.data || error.message || error);
     return res.status(500).json({ error: 'OpenAI request failed' });
