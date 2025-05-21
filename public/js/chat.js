@@ -12,32 +12,41 @@ document.addEventListener('DOMContentLoaded', () => {
       userBubble.classList.add('message', 'user');
       chatLog.appendChild(userBubble);
   
-      // Simulated AI interpretation
-      const lower = message.toLowerCase();
-      let addedType = null;
-      let parsedItem = null;
-  
-      if (lower.includes("add") && lower.includes("task")) {
-        addedType = "task";
-        parsedItem = message.split("task")[1]?.trim() || null;
-      } else if (lower.includes("add") && lower.includes("habit")) {
-        addedType = "habit";
-        parsedItem = message.split("habit")[1]?.trim() || null;
-      }
-  
       const botBubble = document.createElement('div');
       botBubble.classList.add('message', 'bot');
   
-      if (addedType && parsedItem) {
-        botBubble.textContent = `✅ Added ${addedType}: ${parsedItem}`;
-        const listItem = document.createElement('li');
-        listItem.textContent = parsedItem;
-        document.getElementById('task-preview-list').appendChild(listItem);
-      } else {
-        botBubble.textContent = "⚠️ Sorry, I couldn't understand what to add. Try using 'add task' or 'add habit'.";
-      }
+      fetch('/api/chat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      })
+      .then(res => res.json())
+      .then(data => {
+        try {
+          const parsed = JSON.parse(data.result);
+          if (parsed.type && parsed.item) {
+            if (parsed.type === 'task') {
+              loggrAddTask(parsed.item);
+            } else if (parsed.type === 'habit') {
+              loggrAddHabit(parsed.item);
+            }
+            botBubble.textContent = `✅ Added ${parsed.type}: ${parsed.item}`;
+            const listItem = document.createElement('li');
+            listItem.textContent = parsed.item;
+            document.getElementById('task-preview-list').appendChild(listItem);
+          } else {
+            botBubble.textContent = "⚠️ Sorry, I couldn't understand what to add.";
+          }
+        } catch (e) {
+          botBubble.textContent = "⚠️ Error parsing response.";
+        }
+        chatLog.appendChild(botBubble);
+      })
+      .catch(err => {
+        botBubble.textContent = "⚠️ AI backend error.";
+        chatLog.appendChild(botBubble);
+      });
   
-      chatLog.appendChild(botBubble);
       chatInput.value = '';
     });
   });
