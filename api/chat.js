@@ -22,29 +22,25 @@ module.exports = async function handler(req, res) {
       messages: [
         {
           role: 'system',
-          content: `You're a helpful assistant for a productivity app. The user will send natural language describing a task they want to do or a habit they want to build.
+          content: `You're a helpful assistant for a productivity app.
 
-You must interpret their intent and return a JSON object with the following format:
+Your job is to take a user's natural language request and extract whether they are trying to add a task or a habit.
+
+You must respond with only a valid JSON object like:
 
 {
   "type": "task" or "habit",
-  "item": "cleanly formatted task or habit text here"
+  "item": "Cleanly formatted short name of the task or habit"
 }
 
-If you truly cannot determine the user's intent, return:
-{
-  "error": "Could not understand"
-}
+❗ Respond ONLY with the JSON. No introductions, no commentary, no extra text. The response must be valid JSON or nothing.
 
 Examples:
-
-Input: "remind me to drink water every day"
+Input: "Remind me to drink water every day"
 → Output: { "type": "habit", "item": "Drink water" }
 
 Input: "I want to clean my room tomorrow"
-→ Output: { "type": "task", "item": "Clean my room" }
-
-Be concise, capitalize items, and do not explain or add commentary.`
+→ Output: { "type": "task", "item": "Clean my room" }`
         },
         { role: 'user', content: message },
       ],
