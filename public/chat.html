@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loggr</title>
+    <link rel="stylesheet" href="styles/main.css">
+    </head>
+<body>
+    <header>
+        <h1>Chat</h1>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="#">Features</a></li>
+            <li><a href="#">Community</a></li>
+            <li><a href="#">Chatbot</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+  <section id="chat-container">
+    <div id="chat-main">
+      <div id="chat-log"></div>
+      <div id="chat-controls">
+        <input type="text" id="chat-input" placeholder="Type your message here...">
+        <button id="send-btn">Send</button>
+      </div>
+    </div>
+    <div id="chat-tasks-preview">
+      <h2>New Tasks</h2>
+      <ul id="task-preview-list"></ul>
+    </div>
+  </section>
+  <script src="js/chat.js"></script>
+</main>

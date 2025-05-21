@@ -311,3 +311,145 @@ form#login-form {
     font-weight: 500;
     color: #f1f1f1;
   }
+
+
+
+/* Planner-style horizontal chatbot layout */
+#chat-container {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 40px auto;
+  padding: 20px;
+  max-width: 1000px;
+  background-color: #1e1e1e;
+  border-radius: 10px;
+}
+
+#chat-main {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#chat-tasks-preview {
+  flex: 1;
+  background-color: #121212;
+  padding: 16px;
+  border-radius: 8px;
+  border: 1px solid #333;
+  color: #f1f1f1;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+#chat-tasks-preview h2 {
+  margin-bottom: 12px;
+  font-size: 18px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 6px;
+}
+
+#task-preview-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#task-preview-list li {
+  background-color: #2a2a2a;
+  padding: 10px 14px;
+  border-left: 4px solid #2a4fff;
+  border-radius: 6px;
+  animation: slideIn 0.3s ease forwards;
+  opacity: 0;
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+  #chat-log {
+    background-color: #111;
+    border: 1px solid #333;
+    padding: 12px;
+    height: 300px;
+    overflow-y: auto;
+    border-radius: 6px;
+    font-size: 15px;
+  }
+
+  #chat-controls {
+    display: flex;
+    gap: 10px;
+  }
+
+  #chat-input {
+    flex: 1;
+    padding: 10px;
+    background-color: #2a2a2a;
+    border: 1px solid #444;
+    color: white;
+    border-radius: 6px;
+  }
+
+  #chat-send {
+    padding: 10px 16px;
+    background-color: #2a4fff;
+    border: none;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+
+
+#chat-log {
+  background-color: #111;
+  border: 1px solid #333;
+  padding: 12px;
+  height: 300px;
+  overflow-y: auto;
+  border-radius: 6px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* User-submitted input styled like a task card */
+.message.user {
+  align-self: stretch;
+  background-color: #2a2a2a;
+  border-left: 4px solid #2a4fff;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  color: white;
+  font-size: 15px;
+}
+
+/* Bot response styled like a planner confirmation */
+.message.bot {
+  align-self: stretch;
+  background-color: #1a1a1a;
+  border-left: 4px solid #444;
+  padding: 10px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #f1f1f1;
+  opacity: 0.9;
+}

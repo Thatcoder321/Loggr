@@ -162,3 +162,18 @@ function addXP(amount) {
 
   updateStatsDisplay(); // Ensure XP display updates
 }
+// === GLOBAL HELPERS FOR CHATBOT INTEGRATION ===
+// Allow external scripts (e.g., chatbot) to add tasks or habits
+window.loggrAddTask = function(text) {
+  renderTask(text);
+  taskArray.push(text);
+  localStorage.setItem(`tasks-${currentUser}`, JSON.stringify(taskArray));
+  addXP(10);
+};
+
+window.loggrAddHabit = function(text) {
+  renderHabit(text);
+  savedHabits[text] = false;
+  localStorage.setItem(habitKey, JSON.stringify(savedHabits));
+  addXP(5);
+};
