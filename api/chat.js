@@ -45,7 +45,7 @@ Input: "I want to clean my room tomorrow"
         { role: 'user', content: message },
       ],
     });
-    console.log("OPENAI RESPONSE:", completion);
+    console.log("GPT RAW CONTENT:", completion.choices[0].message.content);
 
     const content = completion.choices[0].message.content;
     try {
