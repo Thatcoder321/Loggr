@@ -1,9 +1,8 @@
-const { Configuration, OpenAIApi } = require('openai');
+const OpenAI = require('openai');
 
-const configuration = new Configuration({
+const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(configuration);
 
 module.exports = async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -18,7 +17,7 @@ module.exports = async function handler(req, res) {
 
   try {
     console.log("MESSAGE RECEIVED:", message);
-    const completion = await openai.createChatCompletion({
+    const completion = await openai.chat.completions.create({
       model: 'gpt-4o-mini',
       messages: [
         {
@@ -37,9 +36,9 @@ If the message isn't understandable, return: {
         { role: 'user', content: message },
       ],
     });
-    console.log("OPENAI RESPONSE:", completion.data);
+    console.log("OPENAI RESPONSE:", completion);
 
-    const aiResponse = completion.data.choices[0].message.content;
+    const aiResponse = completion.choices[0].message.content;
     return res.status(200).json({ result: aiResponse });
   } catch (error) {
     console.error('OpenAI error:', error.response?.data || error.message || error);
