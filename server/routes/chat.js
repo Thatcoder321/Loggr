@@ -39,7 +39,7 @@ If the message isn't understandable, return: {
     const aiResponse = completion.data.choices[0].message.content;
     res.json({ result: aiResponse });
   } catch (error) {
-    console.error('OpenAI error:', error);
+    console.error('OpenAI error:', error.response?.data || error.message || error);
     res.status(500).json({ error: 'OpenAI request failed' });
   }
 });
