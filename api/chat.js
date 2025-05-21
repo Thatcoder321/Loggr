@@ -45,14 +45,14 @@ Input: "I want to clean my room tomorrow"
         { role: 'user', content: message },
       ],
     });
-    console.log("GPT RAW CONTENT:", completion.choices[0].message.content);
+    const raw = completion.choices?.[0]?.message?.content;
+    console.log("GPT RAW CONTENT:", raw);
 
-    const content = completion.choices[0].message.content;
     try {
-      const parsed = JSON.parse(content);
+      const parsed = JSON.parse(raw);
       return res.status(200).json(parsed);
     } catch (err) {
-      return res.status(200).json({ error: "Could not parse AI response", raw: content });
+      return res.status(200).json({ error: "Could not parse AI response", raw });
     }
   } catch (error) {
     console.error('OpenAI error:', error.response?.data || error.message || error);
