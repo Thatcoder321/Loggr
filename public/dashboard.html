@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loggr</title>
+    <link rel="stylesheet" href="styles/main.css">
+    </head>
+<body>
+    <header>
+        <h1>Your Dashboard</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="#">Chatbot</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <section id="stats-display">
+            <div id="xp-total">XP: 0</div>
+            <div id="streak-count">Streak: 0 days</div>
+          </section>
+        <div id="task-controls">
+            <input type="text" id="task-input" placeholder="Add a new task">
+            <div id="task-actions">
+              <button id="add-task-btn">Add Task</button>
+              <button id="entry-toggle">▼</button>
+              <div id="entry-dropdown" class="dropdown hidden">
+                <div class="entry-option" data-type="task">Task</div>
+                <div class="entry-option" data-type="habit">Habit</div>
+              </div>
+            </div>
+          </div>
+        <ul id="task-list-display"></ul>
+        <section id="habit-section">
+            <h2>Daily Habits</h2>
+            <ul id="habit-list">
+              <li>
+                <label><input type="checkbox"> Drink Water</label>
+              </li>
+              <li>
+                <label><input type="checkbox"> Exercise</label>
+              </li>
+              <li>
+                <label><input type="checkbox"> Read 10 mins</label>
+              </li>
+            </ul>
+          </section>
+    </main>
+    <script src="js/tasks.js"></script>
+    </body>
+</html>
