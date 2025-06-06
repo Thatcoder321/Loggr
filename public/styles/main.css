@@ -1901,3 +1901,217 @@ header nav a:hover {
 .task-delete-btn:hover svg {
   stroke: var(--theme-btn-danger); /* Becomes red on hover */
 }
+
+/* ================================== */
+/* ===         FEATURES PAGE        === */
+/* ================================== */
+
+#features-container {
+  max-width: 1100px; /* A bit wider to accommodate more cards */
+  margin: 60px auto;
+  padding: 0 20px;
+  text-align: center;
+}
+
+#features-container h2 {
+  font-size: 2.5rem;
+  color: var(--theme-text-primary);
+  margin-bottom: 10px;
+}
+
+#features-container p {
+  font-size: 1.1rem;
+  color: var(--theme-text-secondary);
+  max-width: 600px;
+  margin: 0 auto 50px auto; /* Center the subtitle */
+}
+
+.features-grid {
+  display: grid;
+  /* This creates a responsive grid that automatically adjusts columns */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.feature-card {
+  background-color: var(--theme-bg-card);
+  padding: 30px 25px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid transparent;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Add a subtle border on the light theme for better contrast */
+body[data-theme="flowers"] .feature-card {
+  border-color: rgba(0, 0, 0, 0.05);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.feature-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.feature-icon {
+  font-size: 3rem;
+  display: block;
+  margin-bottom: 15px;
+}
+
+.feature-card h3 {
+  font-size: 1.5rem;
+  color: var(--theme-text-primary);
+  margin-bottom: 10px;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--theme-text-secondary);
+}
+
+/* === styles/main.css - FULLY RESPONSIVE VERSION === */
+
+/* ... (Keep all your existing theme variables and styles from :root to the end of the flower background styles) ... */
+/* All the code you had before this point is good. We are just ADDING a new section at the end. */
+/* For completeness, I will provide the whole file. Replace everything. */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root { /* Default Theme */
+  --theme-bg-main: #161925; --theme-bg-sidebar: #0D0F18; --theme-bg-card: #1E2233; --theme-bg-input: #2A2F45; --theme-bg-gradient: linear-gradient(to bottom right, #121212, #1e1e2e, #222233); --theme-text-primary: #E0E1E6; --theme-text-secondary: #8A91A8; --theme-text-placeholder: #686D82; --theme-accent-color: #38BDF8; --theme-accent-color-darker: #2c97c9; --theme-border-color: #30364F; --theme-checkbox-border: #4A5068; --theme-progress-bar-fill: var(--theme-accent-color); --theme-progress-bar-bg: #30364F; --theme-btn-danger: #ff4e5e; --theme-btn-danger-hover: #e04646; --theme-btn-habit-complete: #22c55e; --theme-btn-habit-bg: var(--theme-bg-input);
+}
+body[data-theme="flowers"] { /* Flowers Theme */
+  --theme-bg-main: #fdf4f6; --theme-bg-sidebar: #f8e3ea; --theme-bg-card: rgba(255, 255, 255, 0.7); --theme-bg-input: #fce4ec; --theme-bg-gradient: linear-gradient(to bottom right, #fdf4f6, #f8e3ea); --theme-text-primary: #5c3b54; --theme-text-secondary: #8c6a7d; --theme-text-placeholder: #a1887f; --theme-accent-color: #f06292; --theme-accent-color-darker: #e91e63; --theme-border-color: #f8bbd0; --theme-checkbox-border: #f48fb1; --theme-progress-bar-fill: var(--theme-accent-color); --theme-progress-bar-bg: #fce4ec; --theme-btn-danger: #ef9a9a; --theme-btn-danger-hover: #e57373; --theme-btn-habit-complete: #66bb6a; --theme-btn-habit-bg: #f8bbd0;
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: 'Inter', sans-serif; background-color: var(--theme-bg-main); color: var(--theme-text-primary); min-height: 100vh; font-size: 14px; transition: background-color 0.4s ease, color 0.4s ease; }
+body.profile-page { background: var(--theme-bg-gradient); }
+
+/* --- Mobile Menu Button (Hidden on Desktop) --- */
+.mobile-menu-btn {
+    display: none; /* Hidden by default */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1100; /* Ensure it's on top */
+}
+.mobile-menu-btn svg {
+    stroke: var(--theme-text-primary);
+}
+
+/* === Dashboard & Global Styles === */
+.dashboard-container { display: flex; }
+.sidebar { width: 260px; background-color: var(--theme-bg-sidebar); height: 100vh; padding: 30px 20px; display: flex; flex-direction: column; flex-shrink: 0; position: sticky; top: 0; transition: transform 0.3s ease-in-out; }
+.sidebar-nav a { color: var(--theme-text-secondary); /* ... */ text-decoration: none; display: block; padding: 12px 15px; border-radius: 6px; margin-bottom: 10px; font-weight: 500; }
+.sidebar-nav li.active a, .sidebar-nav li a:hover { background-color: var(--theme-bg-input); color: var(--theme-text-primary); }
+.stat-item { /* ... */ margin-bottom: 20px; }
+.stat-item h3 { color: var(--theme-text-secondary); font-size: 0.9em; font-weight: 500; margin-bottom: 8px; }
+.stat-item p { color: var(--theme-text-primary); font-size: 0.9em; font-weight: 600; margin-top: 8px; }
+.main-content { flex-grow: 1; padding: 30px 40px; overflow-y: auto; }
+.main-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+.main-header h1 { color: var(--theme-text-primary); }
+.header-icons { display: flex; align-items: center; gap: 20px; }
+.header-icons .icon { color: var(--theme-text-secondary); font-size: 1.5rem; cursor: pointer; }
+.add-task-bar { background-color: var(--theme-bg-input); color: var(--theme-text-placeholder); max-width: 350px; margin-left: auto; margin-right: auto; padding: 15px 20px; border-radius: 10px; display: flex; align-items: center; font-weight: 500; margin-bottom: 30px; cursor: pointer; }
+.add-task-bar .icon { color: var(--theme-text-primary); margin-right: 10px; }
+.card { background-color: var(--theme-bg-card); border: 1px solid transparent; padding: 25px; border-radius: 10px; }
+body[data-theme="flowers"] .card { border-color: rgba(0,0,0,0.05); }
+.card h2 { color: var(--theme-text-primary); }
+.main-content-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+.habits-card { grid-area: habits; }
+.tasks-card { grid-area: tasks; }
+.upcoming-card { grid-area: upcoming; grid-column: 1 / -1; }
+/* ... (all your other component styles like task-item, habit-item, profile-container, etc. remain here) ... */
+.task-item, .habit-item, .upcoming-item { display: flex; align-items: center; border-bottom: 1px solid var(--theme-border-color); padding-bottom: 15px; margin-bottom: 15px; }
+.task-item:last-child, .habit-item:last-child, .upcoming-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+.task-details, .habit-details, .upcoming-details { flex-grow: 1; margin: 0 15px; }
+h4 { color: var(--theme-text-primary); }
+.due-date, .streak { color: var(--theme-text-secondary); font-size: 0.85em; }
+.checkbox { width: 20px; height: 20px; border: 2px solid var(--theme-checkbox-border); border-radius: 5px; flex-shrink: 0; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.checkbox.checked { background-color: var(--theme-accent-color); border-color: var(--theme-accent-color); color: #fff; }
+.task-item.completed h4 { text-decoration: line-through; color: var(--theme-text-secondary); }
+.task-item.completed { opacity: 0.7; }
+.task-actions { margin-left: auto; }
+.task-delete-btn { background: none; border: none; cursor: pointer; padding: 5px; }
+.task-delete-btn svg { width: 20px; height: 20px; stroke: var(--theme-text-secondary); transition: stroke 0.2s; }
+.task-delete-btn:hover svg { stroke: var(--theme-btn-danger); }
+.complete-habit-btn { /* ... */ }
+header { display: flex; justify-content: space-between; align-items: center; padding: 15px 40px; background-color: var(--theme-bg-sidebar); border-bottom: 1px solid var(--theme-border-color); }
+header h1 { color: var(--theme-text-primary); font-size: 1.5rem; }
+header nav ul { list-style: none; display: flex; gap: 1rem; }
+header nav a { color: var(--theme-text-secondary); text-decoration: none; font-weight: 500; padding: 8px 12px; border-radius: 6px; transition: color 0.2s ease, background-color 0.2s ease; }
+header nav a:hover { color: var(--theme-text-primary); background-color: var(--theme-bg-input); }
+#features-container { /* ... */ }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+/* (all other styles) */
+
+/* ================================================= */
+/* ===         RESPONSIVE MEDIA QUERIES          === */
+/* ================================================= */
+
+/* For tablets and smaller devices (e.g., up to 992px) */
+@media (max-width: 992px) {
+    /* --- Hide Desktop Elements --- */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 280px;
+        transform: translateX(-100%); /* Start off-screen */
+        z-index: 1000;
+        border-right: 1px solid var(--theme-border-color);
+    }
+    .desktop-nav {
+        display: none; /* Hide the top desktop nav */
+    }
+
+    /* --- Show Mobile Elements --- */
+    .sidebar.is-open {
+        transform: translateX(0); /* Slide in when active */
+    }
+    .mobile-menu-btn {
+        display: flex; /* Show the hamburger button */
+    }
+
+    /* --- Adjust Layouts --- */
+    .dashboard-container {
+        flex-direction: column; /* This is for cases where sidebar is not part of it */
+    }
+    .main-content {
+        width: 100%;
+        padding: 20px; /* Reduce padding on smaller screens */
+    }
+    /* Stack the dashboard cards */
+    .main-content-layout {
+        grid-template-columns: 1fr;
+    }
+    header h1 {
+        flex-grow: 1;
+        text-align: center;
+    }
+    /* Ensure icons on dashboard header don't get squished */
+    .main-header {
+        gap: 15px;
+    }
+    .main-header .header-icons {
+        margin-left: auto;
+    }
+}
+
+/* For small mobile phones (e.g., up to 480px) */
+@media (max-width: 480px) {
+    .main-content {
+        padding: 15px;
+    }
+    .card {
+        padding: 20px;
+    }
+    .add-task-bar {
+        width: 100%;
+        max-width: none;
+    }
+}
