@@ -89,8 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   });
+  updateStats();
 });
-
 function renderTask(taskText) {
   const li = document.createElement('li');
   li.textContent = taskText;
@@ -137,6 +137,13 @@ function renderHabit(habitText) {
   li.appendChild(label);
   document.getElementById('habit-list').appendChild(li);
 }
+function updateStats() {
+  document.getElementById('total-tasks').textContent = `📝 Tasks: ${taskArray.length}`;
+  document.getElementById('total-habits').textContent = `🔁 Habits: ${Object.keys(savedHabits).length}`;
+  document.getElementById('current-streak').textContent = `🔥 Streak: ${getCurrentStreak()}`;
+  const xp = parseInt(localStorage.getItem(xpKey)) || 0;
+  document.getElementById('total-xp').textContent = `⭐ XP: ${xp}`;
+}
 
 // === XP TRACKING & STREAK LOGIC ===
 function addXP(amount) {
@@ -160,7 +167,8 @@ function addXP(amount) {
     localStorage.setItem(lastActiveKey, todayDate);
   }
 
-  updateStatsDisplay(); // Ensure XP display updates
+  updateStatsDisplay(); // Update top bar
+  updateStats();        // Update stat cards
 }
 // === GLOBAL HELPERS FOR CHATBOT INTEGRATION ===
 // Allow external scripts (e.g., chatbot) to add tasks or habits

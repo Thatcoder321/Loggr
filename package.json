@@ -1,12 +1,14 @@
 {
-    "name": "loggr",
-    "version": "1.0.0",
-    "description": "AI productivity assistant",
-    "main": "index.js",
-    "scripts": {
-      
-    },
-    "dependencies": {
-      "openai": "^4.0.0"
-    }
+  "name": "loggr",
+  "version": "1.0.0",
+  "description": "AI productivity assistant",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "openai": "^4.0.0"
   }
+}

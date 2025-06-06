@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (startBtn) {
         startBtn.addEventListener('click', () => {
             if (currentUser) {
-                window.location.href = '/dashboard.html';
+                window.location.href = 'dashboard.html';
             } else {
                 window.location.href = 'login.html';
             }

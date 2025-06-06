@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loggr</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="js/profile.js"></script>
+    <script src="js/global.js" defer></script>
+</head>
+<body>
+    <header>
+        <h1>Profile</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="dashboard.html">Dashboard</a></li>
+                <li><a href="profile.html">Profile</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Community</a></li>
+                <li><a href="#">Chatbot</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main id ="profile-container">
+    <h2>Your Profile</h2>
+    <p><strong>User:</strong> <span id="profile-username">Loading...</span> <span id="login-status" title="Logged In">✅</span></p>
+    <p><strong>XP:</strong> <span id="profile-xp">0</span></p>
+    <div id="xp-bar-container">
+        <div id="xp-bar-fill"></div>
+    </div>
+    <p><strong>Streak:</strong> <span id="profile-streak">0 days</span></p>
+    <section id="streak-calendar">
+      <h3>Streak Calendar</h3>
+      <div id="calendar-grid"></div>
+    </section>
+
+
+
+<section id="theme-selector">
+    <h3>Choose Your Theme</h3>
+    <div class="theme-buttons-container">
+      <button class="theme-btn" data-theme="default">Default</button>
+      <button class="theme-btn" data-theme="flowers">Flowers</button>
+    </div>
+  </section>
+  
+  <button id="logout-btn">Log Out</button>
+</main>
+
+    </file>

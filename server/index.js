@@ -1,2 +1,2 @@
-const chatRoute = require('./routes/chat');
+const chatRoute = require('../api/chat');
 app.use('/api/chat', chatRoute);

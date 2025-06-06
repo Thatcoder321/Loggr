@@ -3,55 +3,114 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loggr</title>
+    <title>Dashboard</title>
     <link rel="stylesheet" href="styles/main.css">
-    </head>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="js/main.js" defer></script>
+    <script src="js/global.js" defer></script>
+</head>
 <body>
-    <header>
-        <h1>Your Dashboard</h1>
-        <nav>
-            <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="dashboard.html">Dashboard</a></li>
-                <li><a href="profile.html">Profile</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Community</a></li>
-                <li><a href="#">Chatbot</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section id="stats-display">
-            <div id="xp-total">XP: 0</div>
-            <div id="streak-count">Streak: 0 days</div>
-          </section>
-        <div id="task-controls">
-            <input type="text" id="task-input" placeholder="Add a new task">
-            <div id="task-actions">
-              <button id="add-task-btn">Add Task</button>
-              <button id="entry-toggle">▼</button>
-              <div id="entry-dropdown" class="dropdown hidden">
-                <div class="entry-option" data-type="task">Task</div>
-                <div class="entry-option" data-type="habit">Habit</div>
-              </div>
+    <div class="dashboard-container">
+        <aside class="sidebar">
+            <div class="sidebar-logo">
+                <!-- Placeholder for a logo if any -->
             </div>
-          </div>
-        <ul id="task-list-display"></ul>
-        <section id="habit-section">
-            <h2>Daily Habits</h2>
-            <ul id="habit-list">
-              <li>
-                <label><input type="checkbox"> Drink Water</label>
-              </li>
-              <li>
-                <label><input type="checkbox"> Exercise</label>
-              </li>
-              <li>
-                <label><input type="checkbox"> Read 10 mins</label>
-              </li>
-            </ul>
-          </section>
-    </main>
-    <script src="js/tasks.js"></script>
-    </body>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="index.html"><span></span>Home</a></li>
+                    <li class="active"><a href="#"><span></span>Dashboard</a></li>
+                    <li><a href="profile.html"><span></span>Profile</a></li>
+                    <li><a href="#"><span></span>Features</a></li>
+                    <li><a href="community.html"><span></span>Community</a></li>
+                    <li><a href="chat.html"><span></span>Chatbot</a></li>
+                </ul>
+            </nav>
+            <div class="sidebar-stats">
+                <div class="stat-item">
+                    <h3>Tasks Done</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <p>50%</p>
+                </div>
+                <div class="stat-item">
+                    <h3>Habits Kept</h3>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar"></div>
+                    </div>
+                    <p>75%</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+          <header class="main-header">
+              <h1>Good Morning, Alex</h1>
+              <div class="header-icons">
+                  <span class="icon settings-icon">⚙️</span>
+                  <img src="https://via.placeholder.com/40" alt="User Avatar" class="avatar">
+              </div>
+          </header>
+      
+          <!-- WRAPPER START -->
+          <div class="content-wrapper"> 
+              <div class="add-task-bar">
+                  <span class="icon plus-icon">+</span> Add a task
+              </div>
+      
+              <div class="main-content-layout">
+                <section class="card tasks-card">
+                    <h2>Tasks</h2>
+                    <ul class="task-list"></ul>
+                </section>
+
+                <section class="card habits-card">
+                    <h2>Daily Habits</h2>
+                    <ul class="habit-list"></ul>
+                </section>
+
+                <section class="card upcoming-card">
+                    <h2>Upcoming</h2>
+                    <ul class="upcoming-list"></ul>
+                </section>
+            </div>
+        </main>
+    </div>
+    <!-- Modal for Add Task/Habit -->
+    <!-- Modal for Add Task/Habit -->
+<!-- THIS IS THE CORRECTED CODE -->
+<div id="add-task-modal" class="modal hidden" aria-hidden="true">
+  <div class="modal-content" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <span class="close-button" role="button" tabindex="0" aria-label="Close">×</span>
+    <h2 id="modal-title">Add New</h2>
+    
+    <!-- The form now correctly wraps all its elements -->
+    <form id="add-entry-form">
+        <label for="entry-type">Type:</label>
+        <select id="entry-type" name="entry-type" required>
+            <option value="task">Task</option>
+            <option value="habit">Habit</option>
+        </select>
+
+        <label for="entry-name">Name:</label>
+        <input type="text" id="entry-name" name="entry-name" required>
+
+        <div id="task-fields">
+            <label for="due-date">Due Date:</label>
+            <input type="date" id="due-date" name="due-date">
+        </div>
+
+        <div id="habit-fields" class="hidden">
+            <label for="streak-goal">Streak Goal (days):</label>
+            <input type="number" id="streak-goal" name="streak-goal" min="1">
+        </div>
+
+        <button type="submit">Add</button>
+    </form> <!-- The closing tag is now in the correct place -->
+
+  </div>
+</div>
+
+    
+</body>
 </html>

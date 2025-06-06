@@ -38,17 +38,18 @@ button#start-btn:hover {
     background-color: #123ed6;
 }
 body {
-    background-color: #121212;
+    background: linear-gradient(to bottom right, #121212, #1e1e2e, #222233);
     color: #f1f1f1;
     font-family: 'Inter', sans-serif;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding-top: 60px;
-    min-height: calc(100vh - 120px);
+/* Only dashboard main gets flex column centering */
+.dashboard-main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+  min-height: calc(100vh - 120px);
 }
 
 form#login-form {
@@ -149,28 +150,6 @@ form#login-form {
   cursor: pointer;
 }
 
-#entry-type {
-  position: absolute;
-  top: 100%;
-  right: 0;
-  background-color: #1e1e1e;
-  border: 1px solid #333;
-  color: white;
-  border-radius: 6px;
-  margin-top: 6px;
-  font-size: 14px;
-  display: none;
-  z-index: 1;
-}
-
-#entry-type.show {
-  display: block;
-}
-
-#entry-type option {
-  background-color: #1e1e1e;
-  color: white;
-}
 
 
   #habit-section{
@@ -452,4 +431,1432 @@ form#login-form {
   font-size: 14px;
   color: #f1f1f1;
   opacity: 0.9;
+}
+
+#dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.stat-card {
+  background-color: #1f1f1f;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1.2rem;
+  border: 1px solid #333;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+}
+
+#profile-container {
+  max-width: 600px;
+  margin: 60px auto;
+  background: #1f1f1f;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+#profile-container h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+#profile-container p {
+  font-size: 1.2rem;
+  margin: 10px 0;
+}
+
+#xp-bar-container {
+  width: 100%;
+  height: 20px;
+  background: #333;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0 20px;
+}
+
+#xp-bar-fill {
+  height: 100%;
+  background: linear-gradient(to right, #00c6ff, #0072ff);
+  width: 0; 
+  transition: width 0.4s ease-in-out;
+}
+
+#logout-btn {
+  width: 100%;
+  padding: 12px;
+  background: #ff4e5e;
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+#logout-btn:hover {
+  background: #e04646;
+}
+
+#leaderboard-section {
+  padding: 2rem;
+  text-align: center;
+  background-color: #1f1f1f;
+  border-radius: 10px;
+  max-width: 600px;
+  margin: 2rem auto;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#leaderboard-section h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+#leaderboard-section p {
+  margin-bottom: 1rem;
+  color: #ccc;
+}
+
+#leaderboard-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#leaderboard-list li {
+  background: #2a2a2a;
+  color: #f1f1f1;
+  padding: 1rem;
+  margin: 0.5rem 0;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+:root {
+  --bg-main: #161925;
+  --bg-sidebar: #0D0F18;
+  --bg-card: #1E2233;
+  --bg-input-bar: #2A2F45;
+
+  --text-primary: #E0E1E6;
+  --text-secondary: #8A91A8;
+  --text-placeholder: #686D82;
+
+  --accent-color: #38BDF8;
+  --accent-color-darker: #2c97c9;
+
+  --progress-bar-bg: #30364F;
+  --checkbox-border: #4A5068;
+  --checkbox-checked-bg: var(--accent-color);
+
+  --font-family: 'Inter', sans-serif;
+  --border-radius-sm: 6px;
+  --border-radius-md: 10px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-family);
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  min-height: 100vh;
+  font-size: 14px;
+}
+/* === DASHBOARD PAGE LAYOUT (scoped) === */
+.dashboard-container {
+  display: flex;
+  width: 100vw;
+  max-width: none;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: var(--bg-sidebar);
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.sidebar-nav ul {
+  list-style: none;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.sidebar-nav li a {
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 12px 15px;
+  text-decoration: none;
+  color: var(--text-secondary);
+  border-radius: var(--border-radius-sm);
+  margin-bottom: 10px;
+  font-weight: 500;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.sidebar-nav li a span {
+  margin-right: 10px;
+}
+
+.sidebar-nav li.active a,
+.sidebar-nav li a:hover {
+  background-color: var(--bg-input-bar);
+  color: var(--text-primary);
+}
+
+.sidebar-stats {
+  margin-top: auto;
+  padding-top: 20px;
+}
+
+.stat-item {
+  margin-bottom: 20px;
+}
+
+.stat-item h3 {
+  font-size: 0.9em;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--text-secondary);
+}
+
+.stat-item p {
+  font-size: 0.9em;
+  font-weight: 600;
+  margin-top: 8px;
+  color: var(--text-primary);
+}
+.main-content {
+  flex-grow: 1;
+  padding: 30px 40px;
+  overflow-y: auto;
+  /* We will control width with a new wrapper, so this class just needs to handle padding and scrolling */
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.main-header h1 {
+  font-size: 1.8em;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.header-icons {
+  display: flex;
+  align-items: center;
+}
+
+.header-icons .icon {
+  font-size: 1.5em;
+  color: var(--text-secondary);
+  margin-left: 20px;
+  cursor: pointer;
+}
+.header-icons .avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 20px;
+  object-fit: cover;
+}
+.add-task-bar {
+  background-color: var(--bg-input-bar);
+  padding: 15px 20px;
+  border-radius: var(--border-radius-md);
+  display: flex;
+  align-items: center;
+  color: var(--text-placeholder);
+  font-weight: 500;
+  margin-bottom: 30px;
+  cursor: pointer;
+
+  max-width: 350px;    /* <--- MAKE THIS NUMBER SMALLER. Try 350px. */
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.add-task-bar .icon {
+  font-size: 1.2em;
+  margin-right: 10px;
+  color: var(--text-primary);
+}
+
+/* Dashboard grid layout for main content area */
+.main-content-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    "habits tasks"
+    "upcoming upcoming";
+  gap: 25px;
+  align-items: start;
+}
+
+.habits-card {
+  grid-area: habits;
+}
+
+.tasks-card {
+  grid-area: tasks;
+}
+.upcoming-card {
+  grid-area: upcoming;
+  grid-column: 1 / -1; /* <-- Add this line */
+}
+
+.tasks-card,
+.habits-card,
+.upcoming-card {
+  background-color: var(--bg-card);
+  padding: 25px;
+  border-radius: var(--border-radius-md);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.card h2 {
+  font-size: 1.2em;
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: var(--text-primary);
+}
+
+/* Tasks Card specific (no change needed for grid placement if it's first) */
+.tasks-card {
+  /* styles specific to tasks card */
+}
+
+.task-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--progress-bar-bg);
+}
+.task-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.task-details h4 {
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.task-details .due-date {
+  font-size: 0.85em;
+  color: var(--text-secondary);
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--checkbox-border);
+  border-radius: 5px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8em;
+  color: white;
+  cursor: pointer;
+  flex-shrink: 0; /* Prevent checkbox from shrinking */
+}
+.checkbox.checked {
+  background-color: var(--checkbox-checked-bg);
+  border-color: var(--checkbox-checked-bg);
+}
+
+.progress-ring-item .progress-ring {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0; /* Prevent ring from shrinking */
+}
+.progress-ring__svg {
+  transform: rotate(-90deg);
+}
+.progress-ring__circle-bg {
+  stroke: var(--progress-bar-bg);
+}
+.progress-ring__circle {
+  stroke: var(--accent-color);
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.35s;
+}
+.progress-ring span {
+  position: absolute;
+  font-size: 0.9em;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+
+/* Habits Card specific (no change needed for grid placement if it's second) */
+.habits-card {
+  /* styles specific to habits card */
+}
+
+.habit-item {
+  display: flex;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--progress-bar-bg);
+}
+.habit-item:last-child {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.habit-icon {
+  font-size: 1.5em;
+  color: var(--accent-color);
+  margin-right: 15px;
+  line-height: 1;
+  margin-top: 2px;
+  flex-shrink: 0; /* Prevent icon from shrinking */
+}
+
+.habit-details h4 {
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.habit-details .streak {
+  font-size: 0.85em;
+  color: var(--text-secondary);
+  margin-bottom: 8px;
+}
+.progress-bar-container.habit-progress {
+  height: 6px;
+}
+
+
+/* Upcoming Card specific */
+.upcoming-card {
+  grid-column: 1 / -1;
+}
+
+.upcoming-item {
+  display: flex;
+  align-items: center;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--progress-bar-bg);
+}
+.upcoming-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.upcoming-item:first-child {
+  padding-top: 0;
+}
+
+
+.upcoming-details {
+  flex-grow: 1;
+}
+.upcoming-details h4 {
+  font-size: 1em;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+.upcoming-details .due-date {
+  font-size: 0.85em;
+  color: var(--text-secondary);
+}
+.due-date-right {
+  font-size: 0.85em;
+  color: var(--text-secondary);
+  margin-left: auto;
+}
+
+
+/* General Progress Bar Styling */
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background-color: var(--progress-bar-bg);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: var(--accent-color);
+  border-radius: 10px;
+  transition: width 0.3s ease-in-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) { /* Larger tablets, small desktops */
+  .main-content {
+      padding: 20px;
+  }
+  .main-content-layout {
+      grid-template-columns: 1fr;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      box-sizing: border-box;
+  }
+  .upcoming-card {
+      /* No change needed here, it will just be a full-width card after Tasks and Habits */
+  }
+}
+
+@media (max-width: 768px) { /* Smaller tablets, mobile */
+  .dashboard-container {
+      flex-direction: column;
+  }
+  .sidebar {
+      width: 100%;
+      height: auto;
+      padding: 15px;
+  }
+  .main-header h1 {
+      font-size: 1.5em;
+  }
+  .main-content {
+      padding: 15px;
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      box-sizing: border-box;
+  }
+  .main-content-layout {
+      width: 100%;
+      max-width: none;
+      margin: 0;
+      box-sizing: border-box;
+  }
+}
+
+
+/* Hide elements with the .hidden class */
+.hidden {
+  display: none;
+}
+
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #222233;
+  margin: 10% auto;
+  padding: 28px 32px 24px 32px;
+  border-radius: 10px;
+  width: 95%;
+  max-width: 400px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.35);
+  color: #f1f1f1;
+  position: relative;
+}
+
+.close {
+  color: #f1f1f1;
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  font-size: 1.6em;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+.close:hover {
+  color: #ff4c4c;
+}
+
+
+/* Make hidden elements disappear */
+.hidden {
+  display: none;
+}
+
+/* Modal backdrop styling */
+#add-task-modal {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal box styling */
+.modal {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+  position: relative;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Modal content */
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+/* Input and select styles */
+.modal-content input,
+.modal-content select {
+  padding: 10px 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 16px;
+  width: 100%;
+  font-family: inherit;
+  transition: border-color 0.2s ease;
+}
+
+.modal-content input:focus,
+.modal-content select:focus {
+  outline: none;
+  border-color: #007bff;
+}
+
+/* Button styling */
+.modal-content button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.2s ease;
+}
+
+.modal-content button:hover {
+  background-color: #0056b3;
+}
+
+/* Close button (X icon) */
+.close-button {
+  position: absolute;
+  top: 12px;
+  right: 16px;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #555;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #000;
+}
+/* --- Corrected Modal Styles --- */
+
+/* Global hidden utility class (ensure this is defined clearly once) */
+.hidden {
+  display: none !important; /* Using !important here is a quick fix if other specificity issues linger.
+                              A cleaner approach is below with :not(.hidden).
+                              For now, let's use the :not(.hidden) approach which is cleaner. */
+}
+.hidden { /* Make sure you only have one clear definition of .hidden */
+  display: none;
+}
+
+
+/* Styles for the full-screen backdrop/overlay */
+#add-task-modal {
+  position: fixed;
+  inset: 0; /* same as top:0, right:0, bottom:0, left:0 */
+  background-color: rgba(0, 0, 0, 0.5); /* Dimmed background */
+  z-index: 1000; /* High z-index to be on top */
+
+  /* DO NOT set 'display: flex' here by default.
+     Visibility and display type will be handled by the .hidden class
+     and the :not(.hidden) pseudo-class. */
+  justify-content: center; /* These will apply when display is flex */
+  align-items: center;   /* These will apply when display is flex */
+}
+
+/* When #add-task-modal is NOT hidden, THEN display it as a flex container.
+   This rule correctly applies 'display: flex' only when the 'hidden' class is absent. */
+#add-task-modal:not(.hidden) {
+  display: flex;
+}
+
+/* Styles for the actual dialog box (the .modal-content div) */
+#add-task-modal .modal-content { /* Target .modal-content specifically within this modal */
+  background-color: var(--bg-card, #1E2233); /* Using your CSS variables for consistency */
+  color: var(--text-primary, #E0E1E6);
+  padding: 2rem;
+  border-radius: var(--border-radius-md, 10px);
+  width: 90%;
+  max-width: 500px; /* Or your preferred max-width */
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: relative; /* For positioning the close button inside */
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Spacing between elements in the modal content */
+}
+
+/* Modal Title */
+#add-task-modal #modal-title {
+    color: var(--text-primary, #E0E1E6);
+    font-size: 1.5em; /* Larger title */
+    margin-bottom: 0.5rem; /* Space below title */
+    font-weight: 600;
+}
+
+
+/* Close button styling */
+#add-task-modal .close-button {
+  position: absolute;
+  top: 1rem; /* Adjust for nice placement */
+  right: 1rem; /* Adjust for nice placement */
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-secondary, #8A91A8);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.25rem; /* Make clickable area a bit larger */
+  line-height: 1; /* Ensure tight fit */
+}
+
+#add-task-modal .close-button:hover {
+  color: var(--text-primary, #E0E1E6);
+}
+
+/* Form elements within the modal */
+#add-task-modal .modal-content label {
+  font-size: 0.9em;
+  color: var(--text-secondary, #8A91A8);
+  margin-bottom: 0.35rem;
+  display: block; /* Ensure labels take full width */
+  font-weight: 500;
+}
+
+#add-task-modal .modal-content input[type="text"],
+#add-task-modal .modal-content input[type="date"],
+#add-task-modal .modal-content input[type="number"],
+#add-task-modal .modal-content select {
+  padding: 10px 14px;
+  background-color: var(--bg-input-bar, #2A2F45);
+  border: 1px solid var(--checkbox-border, #4A5068);
+  color: var(--text-primary, #E0E1E6);
+  border-radius: var(--border-radius-sm, 6px);
+  font-size: 1em; /* Match base font size */
+  width: 100%;
+  box-sizing: border-box; /* Include padding and border in the element's total width and height */
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#add-task-modal .modal-content input:focus,
+#add-task-modal .modal-content select:focus {
+  outline: none;
+  border-color: var(--accent-color, #38BDF8);
+  box-shadow: 0 0 0 2px rgba(56, 189, 248, 0.4); /* Subtle focus ring */
+}
+
+#add-task-modal .modal-content button[type="submit"] {
+  background-color: var(--accent-color, #38BDF8);
+  color: var(--bg-sidebar, #0D0F18); /* Ensure contrast, or use white */
+  border: none;
+  padding: 12px 20px;
+  border-radius: var(--border-radius-sm, 6px);
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: background-color 0.2s ease;
+  margin-top: 1rem; /* Space above the submit button */
+}
+
+#add-task-modal .modal-content button[type="submit"]:hover {
+  background-color: var(--accent-color-darker, #2c97c9);
+}
+
+/* Conditional display for task/habit specific fields */
+#add-task-modal #task-fields.hidden,
+#add-task-modal #habit-fields.hidden {
+    display: none;
+}
+
+/* Styles for the actual dialog box (the .modal-content div) */
+#add-task-modal .modal-content {
+  background-color: var(--bg-card, #1E2233);
+  color: var(--text-primary, #E0E1E6);
+  padding: 2rem;
+  border-radius: var(--border-radius-md, 10px);
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  position: relative; /* For positioning the close button inside */
+  display: flex; /* This is for the *internal* layout of the modal content (form elements) */
+  flex-direction: column;
+  gap: 1rem;
+
+  /* --- THIS IS THE CRUCIAL FIX --- */
+  margin: 0; /* Override any other margin rules (like '10% auto') from less specific selectors */
+}
+
+.entry-card.completed {
+  opacity: 0.6;
+  text-decoration: line-through;
+}
+.icon-btn {
+  background: none;
+  border: none;
+  padding: 5px 9px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  cursor: pointer;
+}
+
+.icon-btn svg {
+  width: 21px;
+  height: 21px;
+  fill: #38BDF8; /* Accent blue for consistency */
+  transition: fill 0.2s;
+}
+
+.icon-btn:hover {
+  background: #23273b;
+}
+
+.icon-btn.complete svg {
+  fill: #00ff88;
+}
+.icon-btn.delete svg {
+  fill: #ff4c4c;
+}
+
+
+.icon-btn {
+  background: none;
+  border: none;
+  padding: 5px 9px;
+  border-radius: 5px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+  cursor: pointer;
+}
+.icon-btn:hover {
+  background: #23273b;
+}
+.icon-btn.mark-complete svg { fill: #00ff88; }
+.icon-btn.delete-entry svg { fill: #ff4c4c; }
+.icon-btn svg {
+  width: 21px;
+  height: 21px;
+  fill: #38BDF8;
+  transition: fill 0.2s;
+}
+
+
+.icon-btn.mark-complete svg {
+  fill: #00ff88 !important;
+  color: #00ff88 !important;
+}
+.icon-btn.delete-entry svg {
+  fill: #ff4c4c !important;
+  color: #ff4c4c !important;
+}
+.icon-btn svg {
+  fill: #38BDF8 !important;
+}
+
+
+
+/* Add this new rule to your CSS file */
+.content-wrapper {
+  max-width: 1000px; /* This is the key. Adjust if you want it wider or narrower. */
+  margin: 0 auto;  /* This centers the content horizontally. */
+}
+
+
+/* --- HABIT COMPLETION BUTTON STYLES --- */
+
+/* Make sure the parent uses flexbox to align the button correctly */
+.habit-item {
+  display: flex;
+  align-items: center; /* This is key! */
+  gap: 15px;
+}
+.habit-details {
+  flex-grow: 1; /* Allows details to take up the remaining space */
+}
+
+/* The button itself */
+.complete-habit-btn {
+  background-color: var(--bg-input-bar);
+  border: 1px solid var(--checkbox-border);
+  color: var(--text-primary);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%; /* Makes it a circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  flex-shrink: 0; /* Prevents button from shrinking */
+}
+
+.complete-habit-btn:hover {
+  background-color: #38405c;
+  border-color: var(--accent-color);
+}
+
+/* The "completed" state for the button */
+.complete-habit-btn.completed {
+  background-color: #22c55e; /* Green for success */
+  border-color: #22c55e;
+  cursor: not-allowed;
+}
+
+
+/* --- Add this to the end of main.css --- */
+
+/* New state for a habit completed today */
+.complete-habit-btn.completed-today {
+  background-color: #22c55e; /* Green for success */
+  border-color: #22c55e;
+}
+
+/* The animation for subsequent clicks on the same day */
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+
+.pulsing {
+  animation: pulse 0.3s ease-in-out;
+}
+
+/* ================================== */
+/* === PROFILE & THEME STYLESHEET === */
+/* ================================== */
+
+/* --- 1. Theme Variable Definitions --- */
+
+/* This is the Default Theme (your original dark theme) */
+:root {
+  --theme-bg-gradient: linear-gradient(to bottom right, #121212, #1e1e2e, #222233);
+  --theme-text-primary: #f1f1f1;
+  --theme-text-secondary: #ccc;
+  --theme-bg-card: #1f1f1f;
+  --theme-xp-bar-bg: #333;
+  --theme-xp-bar-fill: linear-gradient(to right, #00c6ff, #0072ff);
+  --theme-streak-active: #2e7d32;
+  --theme-streak-inactive: #424242;
+  --theme-btn-danger: #ff4e5e;
+  --theme-btn-danger-hover: #e04646;
+  --theme-btn-bg: #444;
+  --theme-btn-text: #fff;
+  --theme-btn-active-bg: #007bff;
+}
+
+/* This is our new Flowers Theme */
+body[data-theme="flowers"] {
+  --theme-bg-gradient: linear-gradient(to bottom right, #fdf4f6, #f8e3ea);
+  --theme-text-primary: #5c3b54;
+  --theme-text-secondary: #7b596a;
+  --theme-bg-card: rgba(255, 255, 255, 0.6);
+  --theme-xp-bar-bg: #f1dde4;
+  --theme-xp-bar-fill: linear-gradient(to right, #ff8fab, #fb6b90);
+  --theme-streak-active: #66bb6a; /* A nice leaf green */
+  --theme-streak-inactive: #fce4ec;
+  --theme-btn-danger: #ef9a9a;
+  --theme-btn-danger-hover: #e57373;
+  --theme-btn-bg: #f8bbd0;
+  --theme-btn-text: #5c3b54;
+  --theme-btn-active-bg: #f06292;
+}
+
+/* --- 2. Apply Variables to Your Profile Elements --- */
+
+/* Apply the theme background to the body */
+body {
+  background: var(--theme-bg-gradient);
+  color: var(--theme-text-primary);
+  font-family: 'Inter', sans-serif;
+  transition: background 0.4s ease; /* Smooth theme transition */
+}
+
+/* Update profile container to use variables */
+#profile-container {
+  max-width: 600px;
+  margin: 60px auto;
+  background: var(--theme-bg-card);
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+  color: var(--theme-text-primary);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#profile-container h2, #profile-container h3 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: var(--theme-text-primary);
+}
+
+#profile-container p {
+  font-size: 1.1rem;
+  margin: 10px 0;
+  color: var(--theme-text-secondary);
+}
+#profile-container p strong {
+    color: var(--theme-text-primary);
+}
+
+/* Update XP Bar to use variables */
+#xp-bar-container {
+  width: 100%;
+  height: 20px;
+  background: var(--theme-xp-bar-bg);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 10px 0 20px;
+}
+
+#xp-bar-fill {
+  height: 100%;
+  background: var(--theme-xp-bar-fill);
+  width: 0; 
+  transition: width 0.4s ease-in-out;
+}
+
+/* Update Logout button to use variables */
+#logout-btn {
+  width: 100%;
+  padding: 12px;
+  background: var(--theme-btn-danger);
+  border: none;
+  border-radius: 8px;
+  color: #fff; /* White text looks good on both */
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  margin-top: 20px;
+}
+
+#logout-btn:hover {
+  background: var(--theme-btn-danger-hover);
+}
+
+/* Update Streak Calendar to use variables */
+#calendar-grid .day-box {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    margin: 4px;
+    text-align: center;
+    line-height: 30px;
+    border-radius: 4px;
+    background-color: var(--theme-streak-inactive);
+    color: var(--theme-text-primary);
+}
+#calendar-grid .day-box.active {
+    background-color: var(--theme-streak-active);
+    font-weight: bold;
+}
+
+/* --- 3. Style the New Theme Selector Buttons --- */
+
+#theme-selector {
+  text-align: center;
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--theme-xp-bar-bg);
+}
+
+.theme-buttons-container {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+}
+
+.theme-btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  background-color: var(--theme-btn-bg);
+  color: var(--theme-btn-text);
+  transition: background-color 0.2s ease;
+}
+
+.theme-btn.active {
+  background-color: var(--theme-btn-active-bg);
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 0 8px rgba(0,0,0,0.2);
+}
+
+/* --- ADD THIS ENTIRE BLOCK TO THE END OF main.css --- */
+
+/* Style the flower background images for the "flowers" theme */
+body[data-theme="flowers"]::before,
+body[data-theme="flowers"]::after {
+  content: '';
+  position: fixed; /* Stays in place on scroll */
+  z-index: -1;     /* IMPORTANT: Puts it behind all content */
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.1; /* This is the key to making them subtle! Adjust from 0.05 to 0.2 */
+  pointer-events: none; /* Make them non-interactive */
+}
+
+/* The first flower image (top-left) */
+body[data-theme="flowers"]::before {
+  width: 250px;
+  height: 250px;
+  top: 0;
+  left: 0;
+  transform: rotate(-25deg) translate(-20%, -20%);
+  /* SVG code for a flower branch embedded as a data URI */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,100 C50,100 0,70 0,50 C0,30 20,10 50,10 C80,10 100,30 100,50 C100,70 50,100 50,100 Z' fill='%23fb6b90'/%3E%3Cpath d='M50,90 C50,90 10,65 10,50 C10,35 25,20 50,20 C75,20 90,35 90,50 C90,65 50,90 50,90 Z' fill='%23ff8fab'/%3E%3Cpath d='M50,80 C50,80 20,60 20,50 C20,40 35,30 50,30 C65,30 80,40 80,50 C80,60 50,80 50,80 Z' fill='%23f8bbd0'/%3E%3C/svg%3E");
+}
+
+/* The second flower image (bottom-right) */
+body[data-theme="flowers"]::after {
+  width: 300px;
+  height: 300px;
+  bottom: 0;
+  right: 0;
+  transform: rotate(160deg) translate(-20%, -20%);
+  /* SVG code for a different flower branch */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M95,50 A45,45 0 0 1 50,95 A45,45 0 0 1 5,50 A45,45 0 0 1 95,50 Z' stroke='%23f06292' stroke-width='4' fill='none'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23fb6b90'/%3E%3C/svg%3E");
+}
+
+/* styles/main.css - FULLY THEMED VERSION */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* --- 1. THEME VARIABLE DEFINITIONS --- */
+
+/* :root defines the DEFAULT theme */
+:root {
+  /* Backgrounds */
+  --theme-bg-main: #161925;
+  --theme-bg-sidebar: #0D0F18;
+  --theme-bg-card: #1E2233;
+  --theme-bg-input: #2A2F45;
+  --theme-bg-gradient: linear-gradient(to bottom right, #121212, #1e1e2e, #222233); /* For profile page body */
+
+  /* Text */
+  --theme-text-primary: #E0E1E6;
+  --theme-text-secondary: #8A91A8;
+  --theme-text-placeholder: #686D82;
+
+  /* Accents & Borders */
+  --theme-accent-color: #38BDF8;
+  --theme-accent-color-darker: #2c97c9;
+  --theme-border-color: #30364F;
+  --theme-checkbox-border: #4A5068;
+
+  /* Buttons & Progress */
+  --theme-progress-bar-fill: var(--theme-accent-color);
+  --theme-progress-bar-bg: #30364F;
+  --theme-btn-danger: #ff4e5e;
+  --theme-btn-danger-hover: #e04646;
+  --theme-btn-habit-complete: #22c55e;
+  --theme-btn-habit-bg: var(--theme-bg-input);
+}
+
+/* This is our new FLOWERS theme */
+body[data-theme="flowers"] {
+  /* Backgrounds */
+  --theme-bg-main: #fdf4f6;
+  --theme-bg-sidebar: #f8e3ea;
+  --theme-bg-card: rgba(255, 255, 255, 0.7);
+  --theme-bg-input: #fce4ec;
+  --theme-bg-gradient: linear-gradient(to bottom right, #fdf4f6, #f8e3ea);
+
+  /* Text */
+  --theme-text-primary: #5c3b54;
+  --theme-text-secondary: #8c6a7d;
+  --theme-text-placeholder: #a1887f;
+  
+  /* Accents & Borders */
+  --theme-accent-color: #f06292;
+  --theme-accent-color-darker: #e91e63;
+  --theme-border-color: #f8bbd0;
+  --theme-checkbox-border: #f48fb1;
+
+  /* Buttons & Progress */
+  --theme-progress-bar-fill: var(--theme-accent-color);
+  --theme-progress-bar-bg: #fce4ec;
+  --theme-btn-danger: #ef9a9a;
+  --theme-btn-danger-hover: #e57373;
+  --theme-btn-habit-complete: #66bb6a;
+  --theme-btn-habit-bg: #f8bbd0;
+}
+
+
+/* --- 2. GLOBAL STYLES USING THEME VARIABLES --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--theme-bg-main); /* Use solid color for dashboard */
+  color: var(--theme-text-primary);
+  min-height: 100vh;
+  font-size: 14px;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+/* Apply gradient ONLY to body on profile page */
+body.profile-page {
+    background: var(--theme-bg-gradient);
+}
+
+
+/* --- 3. DASHBOARD STYLES USING THEME VARIABLES --- */
+.dashboard-container {
+  display: flex;
+}
+
+.sidebar {
+  width: 260px;
+  background-color: var(--theme-bg-sidebar);
+  height: 100vh;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  position: sticky;
+  top: 0;
+}
+.sidebar-nav a {
+  color: var(--theme-text-secondary);
+}
+.sidebar-nav li.active a, .sidebar-nav li a:hover {
+  background-color: var(--theme-bg-input);
+  color: var(--theme-text-primary);
+}
+.stat-item h3 { color: var(--theme-text-secondary); }
+.stat-item p { color: var(--theme-text-primary); }
+
+.main-content {
+  flex-grow: 1;
+  padding: 30px 40px;
+  overflow-y: auto;
+}
+
+.main-header h1 { color: var(--theme-text-primary); }
+.header-icons .icon { color: var(--theme-text-secondary); }
+
+.add-task-bar {
+  background-color: var(--theme-bg-input);
+  color: var(--theme-text-placeholder);
+  max-width: 350px;
+  margin-left: auto;
+  margin-right: auto;
+  /* other styles remain the same */
+  padding: 15px 20px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+  margin-bottom: 30px;
+  cursor: pointer;
+}
+.add-task-bar .icon { color: var(--theme-text-primary); }
+
+.card {
+  background-color: var(--theme-bg-card);
+  border: 1px solid transparent; /* Prepare for border */
+}
+body[data-theme="flowers"] .card {
+  border-color: rgba(0,0,0,0.05); /* Add subtle border on light theme */
+}
+.card h2 { color: var(--theme-text-primary); }
+
+.task-item, .habit-item, .upcoming-item {
+  border-bottom: 1px solid var(--theme-border-color);
+}
+
+.task-details h4, .habit-details h4, .upcoming-details h4 {
+  color: var(--theme-text-primary);
+}
+.task-details .due-date, .habit-details .streak, .upcoming-details .due-date, .due-date-right {
+  color: var(--theme-text-secondary);
+}
+
+.checkbox { border: 2px solid var(--theme-checkbox-border); }
+.checkbox.checked { background-color: var(--theme-accent-color); border-color: var(--theme-accent-color); }
+
+.progress-bar-container { background-color: var(--theme-progress-bar-bg); }
+.progress-bar { background-color: var(--theme-progress-bar-fill); }
+
+.complete-habit-btn {
+  background-color: var(--theme-btn-habit-bg);
+  border: 1px solid var(--theme-checkbox-border);
+  color: var(--theme-text-primary);
+  /* other styles remain the same */
+  width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background-color 0.2s ease, border-color 0.2s ease; flex-shrink: 0;
+}
+.complete-habit-btn.completed-today {
+  background-color: var(--theme-btn-habit-complete);
+  border-color: var(--theme-btn-habit-complete);
+}
+
+/* --- 4. PROFILE PAGE STYLES USING THEME VARIABLES --- */
+#profile-container {
+  max-width: 600px;
+  margin: 60px auto;
+  background: var(--theme-bg-card);
+  padding: 30px;
+  border-radius: 12px;
+  color: var(--theme-text-primary);
+}
+#xp-bar-container { background: var(--theme-border-color); }
+#xp-bar-fill { background: var(--theme-accent-color); }
+#logout-btn { background: var(--theme-btn-danger); }
+#logout-btn:hover { background: var(--theme-btn-danger-hover); }
+
+/* Streak Calendar */
+.day-box {
+  background-color: var(--theme-border-color);
+  color: var(--theme-text-secondary);
+  /* other styles remain */
+  display: inline-block; width: 30px; height: 30px; margin: 4px; text-align: center; line-height: 30px; border-radius: 4px;
+}
+.day-box.active {
+  background-color: var(--theme-btn-habit-complete);
+  color: #fff;
+  font-weight: bold;
+}
+
+/* Theme Selector */
+#theme-selector { border-top: 1px solid var(--theme-border-color); /* other styles remain */ text-align: center; margin-top: 30px; padding-top: 20px; }
+.theme-btn { background-color: var(--theme-bg-input); color: var(--theme-text-primary); /* other styles remain */ padding: 10px 20px; font-size: 1rem; border: none; border-radius: 6px; cursor: pointer; transition: background-color 0.2s ease;}
+.theme-btn.active { background-color: var(--theme-accent-color); color: #fff; font-weight: bold; }
+
+/* --- 5. SUBTLE FLOWERS BACKGROUND --- */
+body[data-theme="flowers"]::before,
+body[data-theme="flowers"]::after {
+  content: '';
+  position: fixed;
+  z-index: -1;
+  background-size: contain;
+  background-repeat: no-repeat;
+  opacity: 0.1;
+  pointer-events: none;
+}
+
+body[data-theme="flowers"]::before {
+  width: 250px;
+  height: 250px;
+  top: 0;
+  left: 0;
+  transform: rotate(-25deg) translate(-20%, -20%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,100 C50,100 0,70 0,50 C0,30 20,10 50,10 C80,10 100,30 100,50 C100,70 50,100 50,100 Z' fill='%23fb6b90'/%3E%3Cpath d='M50,90 C50,90 10,65 10,50 C10,35 25,20 50,20 C75,20 90,35 90,50 C90,65 50,90 50,90 Z' fill='%23ff8fab'/%3E%3Cpath d='M50,80 C50,80 20,60 20,50 C20,40 35,30 50,30 C65,30 80,40 80,50 C80,60 50,80 50,80 Z' fill='%23f8bbd0'/%3E%3C/svg%3E");
+}
+
+body[data-theme="flowers"]::after {
+  width: 300px;
+  height: 300px;
+  bottom: 0;
+  right: 0;
+  transform: rotate(160deg) translate(-20%, -20%);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M95,50 A45,45 0 0 1 50,95 A45,45 0 0 1 5,50 A45,45 0 0 1 95,50 Z' stroke='%23f06292' stroke-width='4' fill='none'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23fb6b90'/%3E%3C/svg%3E");
+}
+
+/* --- ADD THIS NEW BLOCK TO main.css --- */
+
+/* --- Themed Top Navigation Header --- */
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 40px;
+  background-color: var(--theme-bg-sidebar); /* Use the sidebar color for consistency */
+  border-bottom: 1px solid var(--theme-border-color);
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+
+header h1 {
+  color: var(--theme-text-primary);
+  font-size: 1.5rem;
+}
+
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 1rem;
+}
+
+header nav a {
+  color: var(--theme-text-secondary);
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+/* Hover effect for the links */
+header nav a:hover {
+  color: var(--theme-text-primary);
+  background-color: var(--theme-bg-input);
 }
