@@ -1562,14 +1562,15 @@ body[data-theme="flowers"]::after {
 }
 
 /* The first flower image (top-left) */
+/* The first flower image (top-left) */
 body[data-theme="flowers"]::before {
   width: 250px;
   height: 250px;
   top: 0;
   left: 0;
   transform: rotate(-25deg) translate(-20%, -20%);
-  /* SVG code for a flower branch embedded as a data URI */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M50,100 C50,100 0,70 0,50 C0,30 20,10 50,10 C80,10 100,30 100,50 C100,70 50,100 50,100 Z' fill='%23fb6b90'/%3E%3Cpath d='M50,90 C50,90 10,65 10,50 C10,35 25,20 50,20 C75,20 90,35 90,50 C90,65 50,90 50,90 Z' fill='%23ff8fab'/%3E%3Cpath d='M50,80 C50,80 20,60 20,50 C20,40 35,30 50,30 C65,30 80,40 80,50 C80,60 50,80 50,80 Z' fill='%23f8bbd0'/%3E%3C/svg%3E");
+  /* CHANGE THIS LINE */
+  background-image: url('../images/flower.png'); 
 }
 
 /* The second flower image (bottom-right) */
@@ -1579,8 +1580,8 @@ body[data-theme="flowers"]::after {
   bottom: 0;
   right: 0;
   transform: rotate(160deg) translate(-20%, -20%);
-  /* SVG code for a different flower branch */
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cpath d='M95,50 A45,45 0 0 1 50,95 A45,45 0 0 1 5,50 A45,45 0 0 1 95,50 Z' stroke='%23f06292' stroke-width='4' fill='none'/%3E%3Ccircle cx='50' cy='50' r='10' fill='%23fb6b90'/%3E%3C/svg%3E");
+  /* AND CHANGE THIS LINE */
+  background-image: url('../images/flower.png');
 }
 
 /* styles/main.css - FULLY THEMED VERSION */
