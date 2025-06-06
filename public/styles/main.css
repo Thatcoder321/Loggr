@@ -1860,3 +1860,43 @@ header nav a:hover {
   color: var(--theme-text-primary);
   background-color: var(--theme-bg-input);
 }
+
+/* --- ADD THIS TO THE END OF main.css --- */
+
+/* Styles for a completed task item */
+.task-item.completed h4 {
+  text-decoration: line-through;
+  color: var(--theme-text-secondary);
+}
+
+.task-item.completed {
+  opacity: 0.7;
+}
+
+/* Styles for the new delete button on a task */
+.task-actions {
+  margin-left: auto; /* Pushes the button to the far right */
+}
+
+.task-delete-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  transition: background-color 0.2s;
+}
+
+.task-delete-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--theme-text-secondary); /* Starts as a neutral color */
+  transition: stroke 0.2s;
+}
+
+.task-delete-btn:hover svg {
+  stroke: var(--theme-btn-danger); /* Becomes red on hover */
+}
