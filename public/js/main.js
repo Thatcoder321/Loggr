@@ -1,6 +1,3 @@
-// =================================================================
-// HELPER FUNCTIONS (Defined first for clarity)
-// =================================================================
 
 // --- Task Persistence ---
 function loadTasks() {
@@ -19,15 +16,19 @@ function renderSavedTasks() {
     container.innerHTML = '';
     const tasks = loadTasks();
 
+    if (tasks.length === 0) {
+        
+        return;
+    }
+    
     tasks.forEach(task => {
-        // Determine classes based on completion status
         const itemClass = task.completed ? 'task-item completed' : 'task-item';
         const checkboxClass = task.completed ? 'checkbox checked' : 'checkbox';
         const checkmark = task.completed ? '✓' : '';
 
         const newItem = document.createElement('div');
         newItem.className = itemClass;
-        newItem.dataset.id = task.id; // Add ID to the element
+        newItem.dataset.id = task.id; 
 
         newItem.innerHTML = `
             <div class="${checkboxClass}" role="button" tabindex="0">${checkmark}</div>
@@ -93,9 +94,6 @@ function renderSavedHabits() {
 }
 
 
-// =================================================================
-// MAIN SCRIPT (Runs after the DOM is fully loaded)
-// =================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
 
@@ -110,12 +108,10 @@ document.addEventListener('DOMContentLoaded', () => {
         let username = localStorage.getItem('currentUser') || 'User';
         header.textContent = `${greeting}, ${username}`;
     }
-
     const settingsBtn = document.querySelector('.settings-icon');
     if (settingsBtn) {
         settingsBtn.addEventListener('click', () => { window.location.href = "profile.html"; });
     }
-
     renderSavedTasks();
     renderSavedHabits();
 
@@ -123,17 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const modal = document.getElementById('add-task-modal');
     const openBtn = document.querySelector('.add-task-bar');
     if (!modal || !openBtn) { return; }
-
     const closeBtn = modal.querySelector('.close-button');
     const form = modal.querySelector('#add-entry-form');
     const entryTypeSelect = modal.querySelector('#entry-type');
     const taskFields = modal.querySelector('#task-fields');
     const habitFields = modal.querySelector('#habit-fields');
-
-    function updateEntryFields() { /* ... same as before ... */ }
-    function openModal() { /* ... same as before ... */ }
-    function closeModal() { /* ... same as before ... */ }
-    // (Functions hidden for brevity, but they are in the full code block)
     function updateEntryFields() { if (entryTypeSelect.value === 'habit') { taskFields.classList.add('hidden'); habitFields.classList.remove('hidden'); } else { taskFields.classList.remove('hidden'); habitFields.classList.add('hidden'); } }
     function openModal() { updateEntryFields(); modal.classList.remove('hidden'); modal.querySelector('select, input, button:not(.close-button)')?.focus(); }
     function closeModal() { modal.classList.add('hidden'); }
@@ -143,11 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !modal.classList.contains('hidden')) { closeModal(); } });
     modal.addEventListener('click', (event) => { if (event.target === modal) { closeModal(); } });
     
-
-    // Form submission now handles saving both types with proper structure
+    // Form submission handles both types
     form.addEventListener('submit', (event) => {
         event.preventDefault();
-
         const formData = new FormData(form);
         const type = formData.get('entry-type');
         const name = formData.get('entry-name');
@@ -160,21 +148,17 @@ document.addEventListener('DOMContentLoaded', () => {
         } else { // It's a task
             const dueDate = formData.get('due-date');
             const tasks = loadTasks();
-            tasks.push({
-                id: Date.now(), // Give it a unique ID
-                name: name,
-                dueDate: dueDate || null,
-                completed: false // Start as not completed
-            });
+            tasks.push({ id: Date.now(), name: name, dueDate: dueDate || null, completed: false });
             saveTasks(tasks);
             renderSavedTasks();
         }
-
         form.reset();
         closeModal();
     });
 
-    // --- COMBINED EVENT LISTENER FOR ALL ACTIONS ---
+    // =========================================================
+    // THIS IS THE CORRECTED EVENT LISTENER BLOCK
+    // =========================================================
     document.body.addEventListener('click', function(event) {
         
         // --- Handle Task Checkbox Click ---
@@ -191,6 +175,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     renderSavedTasks(); // Re-render the UI
                 }
             }
+            return; // Stop processing after handling this click
         }
 
         // --- Handle Task Delete Button Click ---
@@ -204,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 saveTasks(tasks);
                 renderSavedTasks(); // Re-render the UI
             }
+            return; // Stop processing
         }
 
         // --- Handle Habit Completion Click ---
@@ -227,6 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 habitButton.classList.add('pulsing');
                 setTimeout(() => { habitButton.classList.remove('pulsing'); }, 300);
             }
+            return; // Stop processing
         }
     });
 });
